@@ -41,8 +41,11 @@ public class Calendar {
     }
 
     public void printRemainingAgendaForTheWeek() {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        LocalDate endOfWeekDate = LocalDate.now();
+        this.printRemainingAgendaForTheWeek(LocalDateTime.now());
+    }
+
+    public void printRemainingAgendaForTheWeek(LocalDateTime currentDateTime) {
+        LocalDate endOfWeekDate = currentDateTime.toLocalDate();
 
         do {
             endOfWeekDate = endOfWeekDate.plusDays(1);
