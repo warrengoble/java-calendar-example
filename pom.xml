@@ -7,8 +7,8 @@
   <artifactId>calendar-example</artifactId>
   <version>1.0</version>
 
-  <name>calendar</name>
-  <url>http://www.example.com</url>
+  <name>java-calendar-example</name>
+  <url>https://github.com/warrengoble/java-calendar-example</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
