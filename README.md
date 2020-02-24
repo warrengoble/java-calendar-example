@@ -31,8 +31,6 @@ End Time: 10:15 AM
 Description: Six days later
 ```
 
-Note: Using only local time zone.
-
 ## Building and running
 
 Using Maven build system. 
