@@ -14,6 +14,10 @@ public class Calendar {
     private LinkedList<Event> events = new LinkedList<Event>();
 
     public Event addEvent(LocalDate date, LocalTime startTime, LocalTime endTime, String description) {
+        if (endTime.isBefore(startTime)) {
+            return null;
+        }
+
         Event newEvent = new Event(date, startTime, endTime, description);
         this.events.add(newEvent);
 
