@@ -31,6 +31,26 @@ public class AppTest {
     }
 
     @Test
+    // Test will try and add end time before start time which will throw.
+    public void addEventWithError() {
+        Calendar cal = new Calendar();
+        
+        LocalDate testDate = LocalDate.now();
+        LocalTime testStartTime = LocalTime.of(10, 0, 0);
+        LocalTime testEndTime = LocalTime.of(0, 0, 0);
+        String testDescription = "Test addEventWithError";
+
+        Event retEvent = cal.addEvent(
+            testDate,
+            testStartTime,
+            testEndTime,
+            testDescription
+        );
+
+        assertEquals(null, retEvent);
+    }
+
+    @Test
     public void removeEvent() {
         Calendar cal = new Calendar();
         
@@ -72,7 +92,8 @@ public class AppTest {
         assertFalse(cal.getEvents().contains(retEvent));
     }
 
-    public void testEndOfWeek() {
-        //
-    }
+    // TODO Can use application for testing
+    // public void testEventRestOfWeek() {
+    //     // TODO Will Have to Test formatted output?.
+    // }
 }
