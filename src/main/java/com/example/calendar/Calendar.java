@@ -1,9 +1,16 @@
 package com.example.calendar;
 
-import java.util.*;
-import java.time.*;
+import java.util.LinkedList;
+import java.util.UUID;
+import java.util.Iterator;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.DayOfWeek;
+import java.time.format.FormatStyle;
+import java.time.format.DateTimeFormatter;
 
-public class CalendarExample {
+public class Calendar {
     private LinkedList<Event> events = new LinkedList<Event>();
 
     public Event addEvent(LocalDate date, LocalTime startTime, LocalTime endTime, String description) {
@@ -22,7 +29,7 @@ public class CalendarExample {
         while (listIterator.hasNext()) {
             Event event = listIterator.next();
 
-            if (event.id == id) {
+            if (event.getId() == id) {
                 this.events.remove(event);
                 break;
             }
@@ -35,28 +42,25 @@ public class CalendarExample {
 
         do {
             endOfWeekDate = endOfWeekDate.plusDays(1);
-        } while (endOfWeekDate.getDayOfWeek() != DayOfWeek.SUNDAY);
+        } while (endOfWeekDate.getDayOfWeek() != DayOfWeek.MONDAY);
 
         Iterator<Event> listIterator = this.events.iterator();
         while (listIterator.hasNext()) {
             Event event = listIterator.next();
-            LocalDateTime startDateTime = LocalDateTime.of(event.date, event.startTime);
+            LocalDateTime startDateTime = LocalDateTime.of(event.getDate(), event.getStartTime());
 
             // Check if in range of rest of week
             if (startDateTime.isBefore(endOfWeekDate.atStartOfDay()) && startDateTime.isAfter(currentDateTime)) {
-                System.out.format("Date: %s\nStart Time: %s\nEnd Time: %s\nDescription: %s\n\n", event.date,
-                        event.startTime, event.endTime, event.description);
+                System.out.format("Date: %s\nStart Time: %s\nEnd Time: %s\nDescription: %s\n\n", 
+                event.getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)),
+                event.getStartTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)), 
+                event.getEndTime().format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)), 
+                event.getDescription());
             }
         }
     }
 
-    public void printAllEvents() {
-        ListIterator<Event> listIterator = this.events.listIterator();
-
-        while (listIterator.hasNext()) {
-            Event event = listIterator.next();
-
-            System.out.format("%s\n%s\n%s\n%s\n\n", event.date, event.startTime, event.endTime, event.description);
-        }
+    public LinkedList<Event> getEvents() {
+        return this.events;
     }
 }
